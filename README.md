@@ -8,8 +8,9 @@ Inspirado por ou fork do mural.sh de slackjeff: slackjeff@riseup.net
 13/11/2025 - Banner ASCII, novo menu, renomear programa - Demogorgon
 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
 
-Requisitos sugeridos:
-# touch /var/log/graffiti_wall.log (Como root)
+Requisitos sugeridos (Executar como root ou superusuário):
+# chmod +x graffiti
+# touch /var/log/graffiti_wall.log 
 # chmod 666 /var/log/graffiti_wall.log
 
 Opcional:
