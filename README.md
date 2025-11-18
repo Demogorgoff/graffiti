@@ -1,2 +1,16 @@
 # graffiti
-Programa para deixar mensagens entre usuários de um mesmo sistema linux. 
+graffiti - Programa para deixar mensagens entre usuários de um mesmo sistema linux. 
+# Autor: Demogorgon
+# Inspirado por ou fork do mural.sh de slackjeff <slackjeff@riseup.net>
+# Changelog:
+# 03/04/2024 - Correção ortográfica - devnull (The POSIX Way Samurai)
+# 13/11/2025 - Banner ASCII, novo menu, renomear programa - Demogorgon
+# 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
+
+# Requisitos sugeridos:
+touch /var/log/graffiti_wall.log (Como root)
+chmod 666 /var/log/graffiti_wall.log
+
+# Opcional:
+# chattr +a /var/log/graffiti_wall.log (modo append-only)
+# Para editar: chattr -a /var/log/graffiti_wall.log
