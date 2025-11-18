@@ -1,0 +1,285 @@
+#!/bin/sh
+# Autor: Demogorgon
+# Inspirado por ou fork do mural.sh de slackjeff <slackjeff@riseup.net>
+# Changelog:
+# 03/04/2024 - Correção ortográfica - devnull (The POSIX Way Samurai)
+# 13/11/2025 - Banner ASCII, novo menu, renomear programa - Demogorgon
+# 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
+
+# Requisitos sugeridos:
+# touch /var/log/graffiti_wall.log (Como root)
+# chmod 666 /var/log/graffiti_wall.log
+# Opcional:
+# chattr +a /var/log/graffiti_wall.log (modo append-only)
+# Para editar: chattr -a /var/log/graffiti_wall.log
+
+set -eu
+
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+export PATH
+
+oldstty=''
+if command -v stty >/dev/null 2>&1; then
+    oldstty=$(stty -g 2>/dev/null || printf '')
+    stty -echoctl 2>/dev/null || :
+fi
+
+############### Variáveis ###############
+dir='/var/log'
+file='graffiti_wall.log'
+logfile=$dir/$file
+
+myNameIs=$(
+    { id -un 2>/dev/null || printf 'unknown'; }
+)
+sanitizedUser=$(printf '%s' "$myNameIs" | tr -c '[:alnum:]_.-' '_')
+
+: "${TMPDIR:=/tmp}"
+tempFile="$TMPDIR/graffiti_${sanitizedUser}_$$"
+: > "$tempFile" || {
+    printf 'Erro ao criar arquivo temporário.\n' >&2
+    exit 1
+}
+
+# Cores ANSI (foreground)
+black=$(printf '\033[0;30m')
+red=$(printf '\033[0;31m')
+green=$(printf '\033[0;32m')
+yellow=$(printf '\033[0;33m')
+blue=$(printf '\033[0;34m')
+magenta=$(printf '\033[0;35m')
+cyan=$(printf '\033[0;36m')
+white=$(printf '\033[0;37m')
+grey=$(printf '\033[0;90m')
+
+bright_black=$(printf '\033[90m')
+bright_red=$(printf '\033[91m')
+bright_green=$(printf '\033[92m')
+bright_yellow=$(printf '\033[93m')
+bright_blue=$(printf '\033[94m')
+bright_magenta=$(printf '\033[95m')
+bright_cyan=$(printf '\033[96m')
+bright_white=$(printf '\033[97m')
+
+# Cores ANSI (background)
+bg_black=$(printf '\033[40m')
+bg_red=$(printf '\033[41m')
+bg_green=$(printf '\033[42m')
+bg_yellow=$(printf '\033[43m')
+bg_blue=$(printf '\033[44m')
+bg_magenta=$(printf '\033[45m')
+bg_cyan=$(printf '\033[46m')
+bg_white=$(printf '\033[47m')
+
+bg_bright_black=$(printf '\033[100m')
+bg_bright_red=$(printf '\033[101m')
+bg_bright_green=$(printf '\033[102m')
+bg_bright_yellow=$(printf '\033[103m')
+bg_bright_blue=$(printf '\033[104m')
+bg_bright_magenta=$(printf '\033[105m')
+bg_bright_cyan=$(printf '\033[106m')
+bg_bright_white=$(printf '\033[107m')
+
+reset=$(printf '\033[0m')
+bold=$(printf '\033[1m')
+underline=$(printf '\033[4m')
+
+COLOR_VARS='black red green yellow blue magenta cyan white grey
+bright_black bright_red bright_green bright_yellow bright_blue bright_magenta bright_cyan bright_white
+bg_black bg_red bg_green bg_yellow bg_blue bg_magenta bg_cyan bg_white
+bg_bright_black bg_bright_red bg_bright_green bg_bright_yellow bg_bright_blue bg_bright_magenta bg_bright_cyan bg_bright_white
+reset bold underline'
+
+############### Funções ###############
+
+get_color_value() {
+    case $1 in
+        black)              printf '%s' "$black" ;;
+        red)                printf '%s' "$red" ;;
+        green)              printf '%s' "$green" ;;
+        yellow)             printf '%s' "$yellow" ;;
+        blue)               printf '%s' "$blue" ;;
+        magenta)            printf '%s' "$magenta" ;;
+        cyan)               printf '%s' "$cyan" ;;
+        white)              printf '%s' "$white" ;;
+        grey)               printf '%s' "$grey" ;;
+        bright_black)       printf '%s' "$bright_black" ;;
+        bright_red)         printf '%s' "$bright_red" ;;
+        bright_green)       printf '%s' "$bright_green" ;;
+        bright_yellow)      printf '%s' "$bright_yellow" ;;
+        bright_blue)        printf '%s' "$bright_blue" ;;
+        bright_magenta)     printf '%s' "$bright_magenta" ;;
+        bright_cyan)        printf '%s' "$bright_cyan" ;;
+        bright_white)       printf '%s' "$bright_white" ;;
+        bg_black)           printf '%s' "$bg_black" ;;
+        bg_red)             printf '%s' "$bg_red" ;;
+        bg_green)           printf '%s' "$bg_green" ;;
+        bg_yellow)          printf '%s' "$bg_yellow" ;;
+        bg_blue)            printf '%s' "$bg_blue" ;;
+        bg_magenta)         printf '%s' "$bg_magenta" ;;
+        bg_cyan)            printf '%s' "$bg_cyan" ;;
+        bg_white)           printf '%s' "$bg_white" ;;
+        bg_bright_black)    printf '%s' "$bg_bright_black" ;;
+        bg_bright_red)      printf '%s' "$bg_bright_red" ;;
+        bg_bright_green)    printf '%s' "$bg_bright_green" ;;
+        bg_bright_yellow)   printf '%s' "$bg_bright_yellow" ;;
+        bg_bright_blue)     printf '%s' "$bg_bright_blue" ;;
+        bg_bright_magenta)  printf '%s' "$bg_bright_magenta" ;;
+        bg_bright_cyan)     printf '%s' "$bg_bright_cyan" ;;
+        bg_bright_white)    printf '%s' "$bg_bright_white" ;;
+        reset)              printf '%s' "$reset" ;;
+        bold)               printf '%s' "$bold" ;;
+        underline)          printf '%s' "$underline" ;;
+        *)                  return 1 ;;
+    esac
+    return 0
+}
+
+expand_colors_line() {
+    # Recebe uma linha em $1 e expande ${cor} -> sequência ANSI
+    line=$1
+    expanded=$line
+
+    for var in $COLOR_VARS; do
+        value=$(get_color_value "$var" 2>/dev/null || printf '')
+        [ -n "$value" ] || continue
+        expanded=$(printf '%s' "$expanded" | sed "s|\${$var}|$value|g")
+    done
+
+    printf '%s\n' "$expanded"
+}
+
+usage() {
+    prog=${0##*/}
+    printf 'Uso: %s [opções]\n' "$prog"
+    printf '\n'
+    printf 'Opções:\n'
+    printf '  -h    Mostra esta mensagem de ajuda.\n'
+    printf '  -c    Mostra os códigos ANSI para colorir a mensagem ou arte ASCII.\n'
+    printf '\n'
+    printf 'Dentro da mensagem, use marcadores como ${green},\n'
+    printf '${bright_green}, ${bg_white}, ${bold}, ${underline}, ${reset}.\n'
+    printf '\n'
+}
+
+show_ansi_palette() {
+    printf 'Códigos ANSI disponíveis:\n\n'
+    printf 'Use ${nome_da_cor} antes do texto ou para\n'
+    printf 'mudar a cor e interromper a formatação com ${reset}.\n\n'
+    for var in $COLOR_VARS; do
+        value=$(get_color_value "$var" 2>/dev/null || printf '')
+        [ -n "$value" ] || continue
+
+        if [ "$var" = "underline" ]; then
+            # Sublinha apenas a palavra "underline", não os espaços de padding
+            # "underline" tem 9 caracteres, então completamos até 18 com 9 espaços "normais"
+            printf '  %sunderline%s%-9s -> ${%s}\n' "$value" "$reset" '' "$var"
+        else
+            printf '  %s%-15s%s -> ${%s}\n' "$value" "$var" "$reset" "$var"
+        fi
+
+        printf '\n'
+    done
+}
+
+CLEAR() {
+    if [ -n "$oldstty" ] && command -v stty >/dev/null 2>&1; then
+        stty "$oldstty" 2>/dev/null || :
+    fi
+    rm -f -- "$tempFile"
+    exit 0
+}
+
+############### Testes ###############
+
+if [ ! -f "$logfile" ]; then
+    : > "$logfile"
+    chmod 666 "$logfile"
+fi
+
+############### Trap global ###############
+
+trap 'CLEAR' INT TERM HUP EXIT
+
+############### Início ###############
+
+# Trata opções de linha de comando (-h, -c)
+if [ "$#" -gt 0 ]; then
+    case $1 in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -c)
+            show_ansi_palette
+            exit 0
+            ;;
+        *)
+            prog=${0##*/}
+            printf "%s: opção inválida: %s\n" "$prog" "$1" >&2
+            printf "Use \"%s -h\" para ajuda.\n" "$prog" >&2
+            exit 1
+            ;;
+    esac
+fi
+
+# Exibir parede de graffiti atual com cores expandidas
+if [ -s "$logfile" ]; then
+    while IFS= read -r line; do
+        expand_colors_line "$line"
+    done < "$logfile"
+fi
+
+# Banner ASCII
+printf ' %s   ___|               _|   _| _)  |   _) %s\n' "$white" "$reset"
+printf ' %s  |       __|  _` |  |    |    |  __|  | %s\n' "$white" "$reset"
+printf ' %s  |   |  |    (   |  __|  __|  |  |    | %s\n' "$white" "$reset"
+printf ' %s \____| _|   \__,_| _|   _|   _| \__| _| %s\n' "$white" "$reset"
+printf '\n'
+
+printf '%s%s Escreva sua mensagem e <CTRL-D> p/ pichar. %s\n' "$grey" "$bg_green" "$reset"
+printf '%s%s Ou pressione as teclas <CTRL-C> para sair. %s\n' "$grey" "$bg_white" "$reset"
+printf '\n'
+
+# Lê a mensagem do usuário até EOF (CTRL-D)
+: >"$tempFile"
+cat >"$tempFile"
+
+if [ -s "$tempFile" ]; then
+    # Cabeçalho da "pichação"
+    printf '[ %s%s%s pichou em %s ]\n\n' \
+        "$bold" "$sanitizedUser" "$reset" "$(date)" >>"$logfile"
+
+    # Sanitização:
+    # 1) Remove sequências ANSI do tipo ESC [ ... @-~ (setas, Insert, Home, etc.)
+    # 2) Remove caracteres de controle (inclui backspace/DEL)
+    esc=$(printf '\033')
+       # Sanitização:
+    # 1) Remove caracteres de controle (inclui ESC, backspace/DEL etc.)
+    # 2) Remove resíduos de setas (como [D, [C, [A, [B)
+    sanitized=$(
+        LC_ALL=C tr -d '\000-\010\013\014\016-\037\177' <"$tempFile" |
+        sed 's/\[[0-9;]*[ABCD]//g'
+    )
+    # 'body' = todas as linhas, exceto a última
+    body=$(printf '%s\n' "$sanitized" | sed '$d')
+    # 'last' = última linha (para garantir ${reset} no final)
+    last=$(printf '%s\n' "$sanitized" | sed -n '$p')
+
+    if [ -n "$body" ]; then
+        printf '%s\n' "$body" >>"$logfile"
+    fi
+
+    if [ -n "$last" ]; then
+        # Força ${reset} literal no fim da última linha
+        printf '%s%s\n' "$last" '${reset}' >>"$logfile"
+    fi
+
+    printf '\n' >>"$logfile"
+
+    printf '\n0k, pichando na parede...\n'
+    CLEAR
+else
+    printf 'Escreva alguma coisa...\n'
+    CLEAR
+fi
