@@ -176,10 +176,10 @@ show_ansi_palette() {
 
         if [ "$var" = "underline" ]; then
             # Sublinha apenas a palavra "underline", não os espaços de padding
-            # "underline" tem 9 caracteres, então completamos até 18 com 9 espaços "normais"
+            # "underline" tem 9 caracteres, então completamos até 17 com 9 espaços "normais"
             printf '  %sunderline%s%-9s -> ${%s}\n' "$value" "$reset" '' "$var"
         else
-            printf '  %s%-15s%s -> ${%s}\n' "$value" "$var" "$reset" "$var"
+            printf '  %s%-17s%s -> ${%s}\n' "$value" "$var" "$reset" "$var"
         fi
 
         printf '\n'
