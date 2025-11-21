@@ -9,6 +9,7 @@
 # Requisitos sugeridos:
 # Copiar o programa shellscript graffiti para todos os usuários utilizarem
 # cp graffiti /usr/local/bin/
+# chmod +x /usr/local/bin/graffiti
 # touch /var/log/graffiti_wall.log (Como root)
 # chmod 666 /var/log/graffiti_wall.log
 # Opcional:
