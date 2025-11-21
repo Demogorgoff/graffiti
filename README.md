@@ -10,6 +10,8 @@ Inspirado por ou fork do mural.sh de slackjeff: slackjeff@riseup.net
 
 Requisitos sugeridos (Executar como root ou superusuário):
 # chmod +x graffiti
+# Copiar o shellscript graffiti para todos usuários utilizarem em /usr/local/bin/
+# cp graffiti /usr/local/bin/
 # touch /var/log/graffiti_wall.log 
 # chmod 666 /var/log/graffiti_wall.log
 
