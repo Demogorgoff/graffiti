@@ -12,7 +12,7 @@ Requisitos sugeridos (Executar como root ou superusuário):
 # Copiar o programa shellscript graffiti para todos os usuários utilizarem
 # cp graffiti /usr/local/bin/
 # chmod +x /usr/local/bin/graffiti
-# Cria o arquivo de mensagens e adiciona um "enter" antes do primeiro registro, para ma leitura padronizada.
+# Como root, cria o arquivo de mensagens e adiciona um "enter" antes do primeiro registro, para uma leitura padronizada.
 # touch /var/log/graffiti_wall.log && printf '\n' > /var/log/graffiti_wall.log 
 # chmod 666 /var/log/graffiti_wall.log
 # Opcional:
