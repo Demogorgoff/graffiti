@@ -58,7 +58,7 @@ white=$(printf '\033[37m')
 # Variações de cores com nomes fora do padrão ANSI 
 brown=$(printf '\033[0;33m')        # dark yellow (ANSI brown)
 orange=$(printf '\033[93m')         # bright yellow / orange
-grey=$(printf '\033[90m')           # bright black / dark grey
+gray=$(printf '\033[90m')           # bright black / dark gray
 light_gray=$(printf '\033[37m')     # white (often appears as light gray)
 pink=$(printf '\033[95m')           # bright magenta / pink
 purple=$(printf '\033[35m')         # magenta (dark purple)
@@ -104,7 +104,7 @@ reset=$(printf '\033[0m')
 bold=$(printf '\033[1m')
 underline=$(printf '\033[4m')
 
-COLOR_VARS='black red green yellow blue magenta cyan white brown orange grey light_gray pink purple violet light_blue dark_blue light_green dark_green gold beige
+COLOR_VARS='black red green yellow blue magenta cyan white brown orange gray light_gray pink purple violet light_blue dark_blue light_green dark_green gold beige
 bright_black bright_red bright_green bright_yellow bright_blue bright_magenta bright_cyan bright_white
 bg_black bg_red bg_green bg_yellow bg_blue bg_magenta bg_cyan bg_white
 bg_bright_black bg_bright_red bg_bright_green bg_bright_yellow bg_bright_blue bg_bright_magenta bg_bright_cyan bg_bright_white
@@ -124,7 +124,7 @@ get_color_value() {
         white)              printf '%s' "$white" ;;
         brown)              printf '%s' "$brown" ;;
         orange)             printf '%s' "$orange" ;;
-        grey)               printf '%s' "$grey" ;;
+        gray)               printf '%s' "$gray" ;;
         light_gray)         printf '%s' "$light_gray" ;;
         pink)               printf '%s' "$pink" ;;
         purple)             printf '%s' "$purple" ;;
@@ -269,8 +269,8 @@ printf ' %s  |   |  |    (   |  __|  __|  |  |    | %s\n' "$white" "$reset"
 printf ' %s \____| _|   \__,_| _|   _|   _| \__| _| %s\n' "$white" "$reset"
 printf '\n'
 
-printf '%s%s Escreva sua mensagem e <CTRL-D> p/ pichar. %s\n' "$grey" "$bg_green" "$reset"
-printf '%s%s Ou pressione as teclas <CTRL-C> para sair. %s\n' "$grey" "$bg_white" "$reset"
+printf '%s%s Escreva sua mensagem e <CTRL-D> p/ pichar. %s\n' "$gray" "$bg_green" "$reset"
+printf '%s%s Ou pressione as teclas <CTRL-C> para sair. %s\n' "$gray" "$bg_white" "$reset"
 printf '\n'
 
 # Lê a mensagem do usuário até EOF (CTRL-D)
