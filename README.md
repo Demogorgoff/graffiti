@@ -8,6 +8,9 @@ Inspirado por ou fork do mural.sh de slackjeff: slackjeff@riseup.net
 13/11/2025 - Banner ASCII, novo menu, renomear programa - Demogorgon
 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
 
+Use: graffiti | less para exibir as mensagens linha por linha.
+Use: graffiti | more para exibir as mensagens com paginação.
+
 Requisitos sugeridos (Executar como root ou superusuário):
 # Copiar o programa shellscript graffiti para todos os usuários utilizarem
 # cp graffiti /usr/local/bin/
