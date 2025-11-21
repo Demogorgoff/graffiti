@@ -196,8 +196,8 @@ usage() {
 
 show_ansi_palette() {
     printf 'Códigos ANSI disponíveis:\n\n'
-    printf 'Use ${nome_da_cor} antes do texto ou para\n'
-    printf 'mudar a cor e interromper a formatação com ${reset}.\n\n'
+    printf 'Use ${nome_da_cor} antes do texto para mudar a cor\n'
+    printf 'e para interromper a formatação utilize o ${reset}.\n\n'
     for var in $COLOR_VARS; do
         value=$(get_color_value "$var" 2>/dev/null || printf '')
         [ -n "$value" ] || continue
