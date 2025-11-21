@@ -9,11 +9,14 @@ Inspirado por ou fork do mural.sh de slackjeff: slackjeff@riseup.net
 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
 
 Requisitos sugeridos (Executar como root ou superusuário):
-# chmod +x graffiti
-# Copiar o shellscript graffiti para todos usuários utilizarem em /usr/local/bin/
+# Copiar o programa shellscript graffiti para todos os usuários utilizarem
 # cp graffiti /usr/local/bin/
-# touch /var/log/graffiti_wall.log 
+# chmod +x /usr/local/bin/graffiti
+# touch /var/log/graffiti_wall.log (Como root)
 # chmod 666 /var/log/graffiti_wall.log
+# Opcional:
+# chattr +a /var/log/graffiti_wall.log (modo append-only)
+# Para editar: chattr -a /var/log/graffiti_wall.log
 
 Opcional:
 # chattr +a /var/log/graffiti_wall.log (modo append-only)
