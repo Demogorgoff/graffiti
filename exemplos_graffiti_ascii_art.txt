@@ -18,7 +18,7 @@ ${white}        ) (      |
 ${white}       (( \      |
 ${white}        /` \     |
 ${white}       (| (/     |
-${white}ejm98 ${blue}__${white}-${blue}_ ${white}-${blue}_   _${white}|${blue}_${reset}
+${white}ejm98 ${blue}__${white}-${blue}_ ${white}-${blue}_   _${white}|${blue}_
 
 ${gray}                             .     .       .  .   . .   .   . .    +  .
 ${gray}                            .     .  :     .    .. :. .${green}___---------___.
