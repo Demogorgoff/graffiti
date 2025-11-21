@@ -12,7 +12,8 @@ Requisitos sugeridos (Executar como root ou superusuário):
 # Copiar o programa shellscript graffiti para todos os usuários utilizarem
 # cp graffiti /usr/local/bin/
 # chmod +x /usr/local/bin/graffiti
-# touch /var/log/graffiti_wall.log (Como root)
+# Cria o arquivo de mensagens e adiciona um "enter" antes do primeiro registro, para ma leitura padronizada.
+# touch /var/log/graffiti_wall.log && printf '\n' > /var/log/graffiti_wall.log 
 # chmod 666 /var/log/graffiti_wall.log
 # Opcional:
 # chattr +a /var/log/graffiti_wall.log (modo append-only)
