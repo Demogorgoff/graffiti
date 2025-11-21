@@ -7,6 +7,8 @@
 # 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
 
 # Requisitos sugeridos:
+# Copiar o programa shellscript graffiti para todos os usuários utilizarem
+# cp graffiti /usr/local/bin/
 # touch /var/log/graffiti_wall.log (Como root)
 # chmod 666 /var/log/graffiti_wall.log
 # Opcional:
