@@ -129,7 +129,7 @@ get_color_value() {
         pink)               printf '%s' "$pink" ;;
         purple)             printf '%s' "$purple" ;;
         violet)             printf '%s' "$violet" ;;
-        light_blue)         ṕrintf '%s' "$light_blue" ;;
+        light_blue)         printf '%s' "$light_blue" ;;
         dark_blue)          printf '%s' "$dark_blue" ;;
         light_green)        printf '%s' "$light_green" ;;
         dark_green)         printf '%s' "$dark_green" ;;
