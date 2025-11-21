@@ -189,8 +189,8 @@ usage() {
     printf '  -h    Mostra esta mensagem de ajuda.\n'
     printf '  -c    Mostra os códigos ANSI para colorir a mensagem ou arte ASCII.\n'
     printf '\n'
-    printf 'Dentro da mensagem, use marcadores como ${green},\n'
-    printf '${bright_green}, ${bg_white}, ${bold}, ${underline}, ${reset}.\n'
+    printf 'Dentro da mensagem, use marcadores como ${green}, ${bright_green},\n'
+    printf '${bg_white}, ${bg_bright_white}, ${bold}, ${underline} e ${reset}.\n'
     printf '\n'
 }
 
