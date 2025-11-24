@@ -3,7 +3,7 @@ graffiti - Programa para deixar mensagens entre usuários de um mesmo sistema li
 Autor: Demogorgon
 Inspirado por ou fork do mural.sh de slackjeff: slackjeff@riseup.net
 
-##### Changelog:
+Changelog:
 03/04/2024 - Correção ortográfica - devnull (The POSIX Way Samurai)
 13/11/2025 - Banner ASCII, novo menu, renomear programa - Demogorgon
 13/11/2025 - Proteção contra injeção de comandos / escape codes - Demogorgon
