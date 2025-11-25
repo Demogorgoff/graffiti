@@ -1,0 +1,51 @@
+# File with examples of ASCII art
+# Copy and paste when using graffiti
+
+${white}           ${green}.--.                  ${white}Try not.
+${white} ::${green}\`--._,'.::.`._.--'/${white}::     Do or do not.
+${white} ::::${green}.  ` ${white}__${green}::${white}__${green} '  .${white}::::    There is no try.
+${white} ::::::${green}-:.`'..`'.:-${white}::::::
+${white} ::::::::${green}\ `--' /${white}::::::::              -Yoda
+
+${white}          ,------|
+${white}         []      |
+${white}         ${blue}!!${white}      |
+${white}         ${blue}!${white} ,     |
+${white}       _,~,\     |
+${white}       \)))/     |
+${white}       ((((,     |
+${white}        ) (      |
+${white}       (( \      |
+${white}        /` \     |
+${white}       (| (/     |
+${white}ejm98 ${blue}__${white}-${blue}_ ${white}-${blue}_   _${white}|${blue}_
+
+${gray}                             .     .       .  .   . .   .   . .    +  .
+${gray}                            .     .  :     .    .. :. .${green}___---------___.
+${gray}                                 .  .   .    .  :.:. ${green}_".^ .^ ^.  '.. :"-_. .
+${gray}                              .  :       .  .  .:..${green}/:            . .^  :.:\.
+${gray}                                  .   . :: +. :.:${green}/: .   .    .        . . .:\
+${gray}                           .  :    .     . _ :::${green}/:               .  ^ .  . .:\
+${gray}                            .. . .   . - : :.:.${green}/.                        .  .:\
+${gray}                            .      .     . :.. ${green}|:                  .  .  ^. .:|
+${gray}          ,-.                 .       . : : ..${green}||        .                . . !:|
+${gray}         / \  `.  __..-,O         . . . ::. ::${green}\(                           . :)/
+${gray}        :   \ --''_..-'.'      .     : . : .:.${green}|. ${black}######${green}              .${black}#######${green}::|
+${gray}        |    . .-' `. '.    :.. .  :-  : .:  ::${green}|.${black}#######${green}           ..${black}########${green}:|
+${gray}        :     .     .`.    .  .  .  ..  .  .. :${green}\ ${black}########${green}          :${black}########${green} :/
+${gray}         \     `.  /  ..    .        .+ :: : -.:${green}\ ${black}########${green}       . ${black}########${green}.:/
+${gray}          \      `.   ' .     .  .+   . . . . :.:${green}\. ${black}#######${green}       ${black}#######${green}..:/
+${gray}           `,       `.   \      :: . . . . ::.:..:.${green}\               .    ..:/
+${gray}          ,|,`.        `-.\    .  .  .  .. :  -::::.${green}\.        ||      . .:/
+${gray}        '.||  ``-...__..-`      .  :  .  .  .-:.":.::.${green}\              ..:/
+${gray}         |  |               .      -.   . . . .: .:::.:.${green}\.          .:/
+${gray}         |__|             .   .   .  :      : ....::_:..:${green}\    __.   :/
+${gray}         /||\                .   .  .   .:. .. .  .: :.:.:${green}\      :  /
+${gray}        //||\\                 +   .   .   : . ::. :.:. .:.${green}|\   .:/|
+${gray}       // || \\                .         +   .  .  ...:: ..${green}|  -- .:|
+${gray}    __//__||__\\__        .      . . .   .  .  . ... :..:..${green}"  ..   "
+${gray}   '--------------' SSt    .   .       .      :  .   .: ::${green}/   .  .::\
+
+
+
+
