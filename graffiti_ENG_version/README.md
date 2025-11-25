@@ -2,7 +2,7 @@
 graffiti - Program for leaving messages between users of the same Linux system.
 
 Author: Demogorgon
-Inspired by or fork of mural.sh by slackjeff: slackjeff@riseup.net
+Inspired by or fork of mural in shellscript by slackjeff: slackjeff@riseup.net
 
 Changelog:
 03/04/2024 - Spelling correction - devnull (The POSIX Way Samurai)
